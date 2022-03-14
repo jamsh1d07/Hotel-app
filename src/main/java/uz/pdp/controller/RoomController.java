@@ -60,4 +60,12 @@ public class RoomController {
         return ResponseEntity.status(response.isSuccess() ?
                 HttpStatus.OK : HttpStatus.CONFLICT).body(response);
     }
+
+    @GetMapping("/hotel/{id}")
+    public HttpEntity<?> getAllRooms(@RequestParam("page") int page,@PathVariable Integer id) {
+
+        ApiResponse all = roomService.getAllByHotelId(page, id);
+        return ResponseEntity.status(HttpStatus.OK).body(all);
+
+    }
 }

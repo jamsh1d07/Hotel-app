@@ -2,6 +2,9 @@ package uz.pdp.service;
 
 import org.apache.catalina.LifecycleState;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import uz.pdp.dto.ApiResponse;
 import uz.pdp.dto.RoomDTO;
@@ -77,5 +80,13 @@ public class RoomService {
         Room room = roomOptional.get();
         roomRepository.delete(room);
         return new ApiResponse("Deleted Room!", true, room);
+    }
+
+    public ApiResponse getAllByHotelId(int page, Integer id) {
+
+        Pageable pageable=PageRequest.of(page,10);
+        Page<Room> all = roomRepository.findAllByHotel_Id(id, pageable);
+        return new ApiResponse("All hotel",true,all);
+
     }
 }

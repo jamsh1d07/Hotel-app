@@ -8,4 +8,6 @@ import uz.pdp.entity.Hotel;
 public interface HotelRepository extends JpaRepository<Hotel,Integer> {
 
 boolean existsByName(String name);
+
+
 }
